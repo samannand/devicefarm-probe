@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyno probe harness</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #101214; color: #e8e8e8; font: 14px -apple-system, system-ui, sans-serif; }
+  #bar { height: 36px; line-height: 36px; padding: 0 12px; }
+  iframe { display: block; border: 0; width: 100%; height: calc(100% - 36px); }
+</style>
+</head>
+<body>
+<div id="bar">dyno probe harness <span id="clock"></span></div>
+<!-- The harness iframes the "game", as a site frames a real game. The query is passed
+     through: ?mb=300 holds 300 MB, ?mb=300&grow=64&every=250 grows until iOS kills the tab. -->
+<iframe id="game" title="game"></iframe>
+<script>
+  document.getElementById("game").src = "game.html" + location.search;
+  const started = Date.now();
+  setInterval(() => {
+    document.getElementById("clock").textContent = Math.round((Date.now() - started) / 1000) + " s";
+  }, 1000);
+</script>
+</body>
+</html>
